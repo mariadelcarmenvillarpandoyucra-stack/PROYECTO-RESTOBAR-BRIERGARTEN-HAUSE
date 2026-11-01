@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Variables globales — paleta verde esmeralda profundo & ámbar (rediseño).
+   Se usan como respaldo (fallback) en algunos componentes con CSS puro.
+   ========================================================================== */
+:root {
+  --bg-deep: #0b1512;
+  --bg-panel: #101f1a;
+  --bg-card: #142822;
+  --bg-card-hi: #1a332b;
+  --line: #2c4a41;
+  --gold: #2f9e6e;
+  --gold-soft: #5cc99a;
+  --gold-dim: #1d6b49;
+  --wine: #d99a3f;
+  --wine-soft: #f0b968;
+  --cream: #eaf2ee;
+  --cream-dim: #a6b9b0;
+  --danger: #c1443b;
+}
+
+/* ==========================================================================
+   Estilos base
+   ========================================================================== */
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #0b1512;
+  color: #eaf2ee;
+  -webkit-font-smoothing: antialiased;
+}
+.font-display { font-family: "Cinzel", serif; }
+.bg-tavern { background: radial-gradient(circle at 20% 0%, #142822 0%, #0b1512 55%); }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2c4a41; border-radius: 8px; }
+
+/* ==========================================================================
+   Componentes reutilizables
+   ========================================================================== */
+.card {
+  background: #142822;
+  border: 1px solid #2c4a41;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+}
+.stat-card {
+  background: #142822;
+  border: 1px solid #2c4a41;
+  border-radius: 18px;
+  padding: 1rem 1.1rem;
+}
+.stat-label { font-size: 0.78rem; color: #a6b9b0; margin-bottom: 0.35rem; }
+.stat-value { font-size: 1.5rem; font-weight: 700; color: #eaf2ee; font-family: "Cinzel", serif; }
+
+.btn-gold {
+  background: linear-gradient(135deg, #5cc99a, #2f9e6e);
+  color: #06120d;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  transition: filter .15s ease, transform .1s ease;
+}
+.btn-gold:hover { filter: brightness(1.08); }
+.btn-gold:active { transform: translateY(1px); }
+.btn-gold:disabled { opacity: .55; cursor: not-allowed; }
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #2c4a41;
+  color: #eaf2ee;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  transition: background .15s ease, border-color .15s ease;
+}
+.btn-outline:hover { background: #142822; border-color: #2f9e6e; }
+/* ==========================================================================
+   BARRA LATERAL
+   ========================================================================== */
+.sidebar {
+  background: #0e1c17;
+  border-right: 1px solid #2c4a41;
+  box-shadow: 8px 0 30px rgba(0, 0, 0, 0.45);
+}
+.side-link {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  color: #a6b9b0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background .15s ease, color .15s ease;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+}
+.side-link:hover { background: #142822; color: #eaf2ee; }
+.side-link.active {
+  background: linear-gradient(90deg, rgba(47,158,110,0.20), rgba(47,158,110,0.03));
+  color: #5cc99a;
+  border-left: 3px solid #2f9e6e;
+  padding-left: calc(1rem - 3px);
+}
+.side-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: .3rem;
+  font-size: 0.72rem; font-weight: 600;
+  padding: 0.2rem 0.6rem; border-radius: 999px;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.badge-pendiente { background: rgba(217,154,63,.18); color: #d99a3f; }
+.badge-preparando { background: rgba(74,144,194,.18); color: #4a90c2; }
+.badge-listo { background: rgba(63,179,127,.18); color: #3fb37f; }
+.badge-entregado { background: rgba(166,185,176,.18); color: #a6b9b0; }
+.badge-libre { background: rgba(63,179,127,.18); color: #3fb37f; }
+.badge-ocupada { background: rgba(217,154,63,.18); color: #d99a3f; }
+.badge-cuenta { background: rgba(193,68,59,.18); color: #d3665c; }
+
+input, textarea, select {
+  outline: none;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: #2f9e6e !important;
+}
+
+.view-enter { animation: view-fade .25s ease; }
+@keyframes view-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}

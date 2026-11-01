@@ -1,0 +1,13 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Biergärten Haus - PostgreSQL",
+      "Group": "Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "biergarten",
+      "Username": "biergarten_user",
+      "SSLMode": "prefer"
+    }
+  }
+}
