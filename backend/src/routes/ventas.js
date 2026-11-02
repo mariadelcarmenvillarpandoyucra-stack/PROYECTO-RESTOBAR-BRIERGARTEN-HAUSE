@@ -19,6 +19,7 @@ async function mapVenta(row) {
     subtotal: Number(row.subtotal),
     propina: Number(row.propina),
     metodoPago: row.metodo_pago,
+    referenciaYape: row.referencia_yape || null, // Opcional: para guardar el número o referencia de Yape si aplica
     calificacion: row.calificacion,
     hora: row.hora,
     ts: new Date(row.ts).getTime(),
@@ -31,7 +32,9 @@ router.get("/", requireAuth, asyncHandler(async (_req, res) => {
 }));
 
 router.post("/cobrar", requireAuth, asyncHandler(async (req, res) => {
-  const { mesa, pedidoIds, propina = 0, metodoPago, calificacion = 0 } = req.body || {};
+  // Añadimos referenciaYape opcional en el destructuring del body
+  const { mesa, pedidoIds, propina = 0, metodoPago, calificacion = 0, referenciaYape } = req.body || {};
+  
   if (!mesa || !Array.isArray(pedidoIds) || pedidoIds.length === 0 || !metodoPago) {
     return res.status(400).json({ error: "mesa, pedidoIds y metodoPago son requeridos" });
   }
@@ -50,6 +53,8 @@ router.post("/cobrar", requireAuth, asyncHandler(async (req, res) => {
     const subtotal = pedidos.reduce((s, p) => s + Number(p.total), 0);
     const mesero = pedidos[0].mesero;
 
+    // Si tu tabla de base de datos soporta una columna para referencia, puedes incluirla. 
+    // Si no, el metodoPago 'yape' se guardará directamente en metodo_pago.
     const { rows: ventaRows } = await client.query(
       `INSERT INTO ventas (mesa, mesero_id, mesero, subtotal, propina, metodo_pago, calificacion, hora)
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,

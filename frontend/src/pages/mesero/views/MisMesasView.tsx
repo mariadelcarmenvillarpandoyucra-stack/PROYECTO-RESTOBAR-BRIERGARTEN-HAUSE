@@ -3,6 +3,7 @@ import { Badge } from "../../../components/ui/Badge";
 import { Modal } from "../../../components/ui/Modal";
 import { useStore } from "../../../store/StoreContext";
 import { MenuGrid } from "../components/MenuGrid";
+import qrYape from "../../../../img/qr-mari.jpeg";
 import type {
   ItemPedido,
   MetodoPago,
@@ -1030,6 +1031,33 @@ export function MisMesasView({
 
               </div>
             </div>
+
+            {metodoPago === "qr" && (
+              <div className="rounded-sm border border-line bg-bg-card-hi p-4 text-center">
+                <p className="text-sm font-semibold text-cream">
+                  Escanea el QR con Yape
+                </p>
+
+                <img
+                  src={qrYape}
+                  alt="QR de pago de Yape de Maria del Carmen Villarpando Yucra"
+                  className="mx-auto mt-3 max-h-56 w-auto rounded-sm bg-white p-2"
+                />
+
+                <p className="mt-3 text-xs text-cream-dim">
+                  Cuenta asociada: <strong className="text-cream">617888</strong>
+                </p>
+                <p className="mt-2 text-sm text-cream">
+                  Ingresa este monto en Yape:{" "}
+                  <strong className="text-gold">
+                    Bs. {totalFinal.toFixed(2)}
+                  </strong>
+                </p>
+                <p className="mt-1 text-xs text-cream-dim">
+                  Verifica el monto antes de confirmar el pago.
+                </p>
+              </div>
+            )}
 
             {/* PROPINA */}
 
